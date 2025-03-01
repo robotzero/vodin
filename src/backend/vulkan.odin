@@ -1,51 +1,52 @@
 package backend
 
 import "core:fmt"
-import vv "vendor:vulkan"
+import "core:log"
+import vk "vendor:vulkan"
 
 foreign import VLIB "system:vulkan"
 
 @(default_calling_convention = "c", private)
 foreign VLIB {
-	vkGetInstanceProcAddr :: proc(instance: vv.Instance, name: cstring) -> rawptr ---
+	vkGetInstanceProcAddr :: proc(instance: vk.Instance, name: cstring) -> rawptr ---
 }
-@(private = "file")
-vulkanInstance: vv.Instance
-vkCreateInstance: #type proc "system" (
-	info: ^vv.InstanceCreateInfo,
-	allocator: ^vv.AllocationCallbacks,
-	instance: ^vv.Instance,
-) -> vv.Result
+@(private)
+vulkanInstance: vk.Instance
 
 init_vulkan :: proc() -> bool {
-	vkCreateInstance = auto_cast vkGetInstanceProcAddr(nil, cstring("vkCreateInstance"))
+	vk.load_proc_addresses_global(rawptr(vkGetInstanceProcAddr))
 
-	if vkCreateInstance == nil {
+	if vk.CreateInstance == nil {
 		fmt.println("[ERROR] Failed to load vkCreateInstance function pointer")
 		return false
 	}
-	app_info := vv.ApplicationInfo {
+	app_info := vk.ApplicationInfo {
 		sType              = .APPLICATION_INFO,
 		pApplicationName   = "Odin Vulkan Renderer",
-		applicationVersion = vv.MAKE_VERSION(1, 0, 0),
+		applicationVersion = vk.MAKE_VERSION(1, 0, 0),
 		pEngineName        = "Odin Engine",
-		engineVersion      = vv.MAKE_VERSION(1, 0, 0),
-		apiVersion         = vv.API_VERSION_1_0,
+		engineVersion      = vk.MAKE_VERSION(1, 0, 0),
+		apiVersion         = vk.API_VERSION_1_0,
 	}
 
-	instance_info := vv.InstanceCreateInfo {
+	instance_info := vk.InstanceCreateInfo {
 		sType            = .INSTANCE_CREATE_INFO,
 		pApplicationInfo = &app_info,
 	}
 
+	must(vk.CreateInstance(&instance_info, nil, &vulkanInstance))
+	defer vk.DestroyInstance(vulkanInstance, nil)
 
+	vk.load_proc_addresses_instance(vulkanInstance)
 	// load_proc_adresses_instance(vulkanInstance)
-	if vkCreateInstance(&instance_info, nil, &vulkanInstance) != .SUCCESS {
-		fmt.println("[ERROR] Failed to create Vulkan instance!")
-		return false
-	}
 
 	fmt.println("[INFO] Vulkan instance created successfully!")
 	return true
+}
+
+must :: proc(result: vk.Result, loc := #caller_location) {
+	if result != .SUCCESS {
+		log.panicf("Vulkan failure %v", result, location = loc)
+	}
 }
 

@@ -29,89 +29,83 @@ load_proc_adresses_instance :: proc(instance: vk.Instance) {
 	// CreateXcbSurfaceKHR =
 	// auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateXcbSurfaceKHR"))
 	vk.EnumeratePhysicalDevices =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkEnumeratePhysicalDevices"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkEnumeratePhysicalDevices"))
 	vk.GetPhysicalDeviceProperties =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceProperties"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceProperties"))
 	vk.GetPhysicalDeviceFeatures =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceFeatures"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceFeatures"))
 	vk.GetPhysicalDeviceMemoryProperties =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceMemoryProperties"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceMemoryProperties"))
 	vk.GetPhysicalDeviceQueueFamilyProperties =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceQueueFamilyProperties"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceQueueFamilyProperties"))
 	vk.GetPhysicalDeviceSurfaceSupportKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfaceSupportKHR"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfaceSupportKHR"))
 	vk.GetPhysicalDeviceSurfaceCapabilitiesKHR =
-	auto_cast vk.GetInstanceProcAddr(
-		instance,
-		cstring("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"),
-	)
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"))
 
 	vk.GetPhysicalDeviceSurfaceFormatsKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfaceFormatsKHR"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfaceFormatsKHR"))
 	vk.GetPhysicalDeviceSurfacePresentModesKHR =
-	auto_cast vk.GetInstanceProcAddr(
-		instance,
-		cstring("vkGetPhysicalDeviceSurfacePresentModesKHR"),
-	)
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceSurfacePresentModesKHR"))
 	vk.EnumerateDeviceExtensionProperties =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkEnumerateDeviceExtensionProperties"))
-	vk.CreateDevice = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateDevice"))
-	vk.GetDeviceQueue = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetDeviceQueue"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkEnumerateDeviceExtensionProperties"))
+	vk.CreateDevice = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateDevice"))
+	vk.GetDeviceQueue = auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetDeviceQueue"))
 	vk.DestroySurfaceKHR =
 	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroySurfaceKHR"))
-	vk.DestroyInstance = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyInstance"))
-	vk.DestroyDevice = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyDevice"))
+	vk.DestroyInstance = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyInstance"))
+	vk.DestroyDevice = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyDevice"))
 	vk.CreateSwapchainKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateSwapchainKHR"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateSwapchainKHR"))
 	vk.GetSwapchainImagesKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetSwapchainImagesKHR"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetSwapchainImagesKHR"))
 	vk.CreateImageView = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateImageView"))
 	vk.GetPhysicalDeviceFormatProperties =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceFormatProperties"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetPhysicalDeviceFormatProperties"))
 	vk.CreateImage = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateImage"))
 	vk.GetImageMemoryRequirements =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkGetImageMemoryRequirements"))
-	vk.AllocateMemory = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkAllocateMemory"))
-	vk.BindImageMemory = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkBindImageMemory"))
-	vk.DestroyImageView = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyImageView"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkGetImageMemoryRequirements"))
+	vk.AllocateMemory = auto_cast vkGetInstanceProcAddr(instance, cstring("vkAllocateMemory"))
+	vk.BindImageMemory = auto_cast vkGetInstanceProcAddr(instance, cstring("vkBindImageMemory"))
+	vk.DestroyImageView = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyImageView"))
 	vk.DestroySwapchainKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroySwapchainKHR"))
-	vk.DestroyImage = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyImage"))
-	vk.FreeMemory = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkFreeMemory"))
-	vk.CreateRenderPass = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateRenderPass"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroySwapchainKHR"))
+	vk.DestroyImage = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyImage"))
+	vk.FreeMemory = auto_cast vkGetInstanceProcAddr(instance, cstring("vkFreeMemory"))
+	vk.CreateRenderPass = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateRenderPass"))
 	vk.DestroyRenderPass =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyRenderPass"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyRenderPass"))
 	vk.CreateCommandPool =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateCommandPool"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateCommandPool"))
 	vk.AllocateCommandBuffers =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkAllocateCommandBuffers"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkAllocateCommandBuffers"))
 	vk.FreeCommandBuffers =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkFreeCommandBuffers"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkFreeCommandBuffers"))
 	vk.DestroyCommandPool =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyCommandPool"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyCommandPool"))
 	vk.CreateFramebuffer =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateFramebuffer"))
-	vk.CreateSemaphore = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateSemaphore"))
-	vk.CreateFence = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCreateFence"))
-	vk.DeviceWaitIdle = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDeviceWaitIdle"))
-	vk.DestroySemaphore = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroySemaphore"))
-	vk.DestroyFence = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyFence"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateFramebuffer"))
+	vk.CreateSemaphore = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateSemaphore"))
+	vk.CreateFence = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCreateFence"))
+	vk.DeviceWaitIdle = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDeviceWaitIdle"))
+	vk.DestroySemaphore = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroySemaphore"))
+	vk.DestroyFence = auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyFence"))
 	vk.DestroyFramebuffer =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkDestroyFramebuffer"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkDestroyFramebuffer"))
 	vk.AcquireNextImageKHR =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkAcquireNextImageKHR"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkAcquireNextImageKHR"))
 	vk.BeginCommandBuffer =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkBeginCommandBuffer"))
-	vk.CmdSetViewport = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCmdSetViewport"))
-	vk.CmdSetScissor = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCmdSetScissor"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkBeginCommandBuffer"))
+	vk.CmdSetViewport = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCmdSetViewport"))
+	vk.CmdSetScissor = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCmdSetScissor"))
 	vk.CmdBeginRenderPass =
-	auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCmdBeginRenderPass"))
-	vk.QueueSubmit = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkQueueSubmit"))
-	vk.CmdEndRenderPass = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkCmdEndRenderPass"))
-	vk.EndCommandBuffer = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkEndCommandBuffer"))
-	vk.ResetFences = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkResetFences"))
-	vk.QueuePresentKHR = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkQueuePresentKHR"))
-	vk.WaitForFences = auto_cast vk.GetInstanceProcAddr(instance, cstring("vkWaitForFences"))
+	auto_cast vkGetInstanceProcAddr(instance, cstring("vkCmdBeginRenderPass"))
+	vk.QueueSubmit = auto_cast vkGetInstanceProcAddr(instance, cstring("vkQueueSubmit"))
+	vk.CmdEndRenderPass = auto_cast vkGetInstanceProcAddr(instance, cstring("vkCmdEndRenderPass"))
+	vk.EndCommandBuffer = auto_cast vkGetInstanceProcAddr(instance, cstring("vkEndCommandBuffer"))
+	vk.ResetFences = auto_cast vkGetInstanceProcAddr(instance, cstring("vkResetFences"))
+	vk.QueuePresentKHR = auto_cast vkGetInstanceProcAddr(instance, cstring("vkQueuePresentKHR"))
+	vk.WaitForFences = auto_cast vkGetInstanceProcAddr(instance, cstring("vkWaitForFences"))
 }
 
 // load_proc_addresses :: proc {
