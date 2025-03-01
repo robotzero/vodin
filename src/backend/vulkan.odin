@@ -4,37 +4,37 @@ import "core:fmt"
 import "core:log"
 import vk "vendor:vulkan"
 
-foreign import VLIB "system:vulkan"
+foreign import VULKAN "system:vulkan"
 
 @(default_calling_convention = "c", private)
-foreign VLIB {
+foreign VULKAN {
 	vkGetInstanceProcAddr :: proc(instance: vk.Instance, name: cstring) -> rawptr ---
 }
 @(private)
 vulkanInstance: vk.Instance
 
-init_vulkan :: proc() -> bool {
+initVulkan :: proc() -> bool {
 	vk.load_proc_addresses_global(rawptr(vkGetInstanceProcAddr))
 
 	if vk.CreateInstance == nil {
 		fmt.println("[ERROR] Failed to load vkCreateInstance function pointer")
 		return false
 	}
-	app_info := vk.ApplicationInfo {
+	appInfo := vk.ApplicationInfo {
 		sType              = .APPLICATION_INFO,
-		pApplicationName   = "Odin Vulkan Renderer",
+		pApplicationName   = "Vodin",
 		applicationVersion = vk.MAKE_VERSION(1, 0, 0),
-		pEngineName        = "Odin Engine",
+		pEngineName        = "Vulkan Odin Engine",
 		engineVersion      = vk.MAKE_VERSION(1, 0, 0),
 		apiVersion         = vk.API_VERSION_1_0,
 	}
 
-	instance_info := vk.InstanceCreateInfo {
+	instanceInfo := vk.InstanceCreateInfo {
 		sType            = .INSTANCE_CREATE_INFO,
-		pApplicationInfo = &app_info,
+		pApplicationInfo = &appInfo,
 	}
 
-	must(vk.CreateInstance(&instance_info, nil, &vulkanInstance))
+	must(vk.CreateInstance(&instanceInfo, nil, &vulkanInstance))
 	defer vk.DestroyInstance(vulkanInstance, nil)
 
 	vk.load_proc_addresses_instance(vulkanInstance)
