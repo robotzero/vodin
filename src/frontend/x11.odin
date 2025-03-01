@@ -40,7 +40,7 @@ createWindow :: proc(width, height: u16) -> bool {
 
 	screen := xcb_aux_get_screen(xcbConnection, screenp)
 	values: [2]u32
-	values[0] = 0xFFFFFF // Background color (white)
+	values[0] = screen.whitePixel
 	values[1] = 0x000000 // Border color (black)
 	// mask: u32 = Cw.BackPixel | Cw.EventMask
 
@@ -60,8 +60,20 @@ createWindow :: proc(width, height: u16) -> bool {
 		&values[0],
 	)
 
+	// change_property(
+	// 	xcbConnection,
+	// 	PropMode.Replace,
+	// 	xcbWindow,
+	// 	AtomEnum.AtomWmName,
+	// 	AtomEnum.AtomString,
+	// 	8,
+	// 	cstring("12345677"),
+	// )
 	map_window(xcbConnection, xcbWindow)
-	flush(xcbConnection)
+	if flush(xcbConnection) != 1 {
+		fmt.println("[ERROR] flush failed")
+		return false
+	}
 	for true {
 
 	}
