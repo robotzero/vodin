@@ -8,6 +8,7 @@ import "core:time"
 
 runGame :: proc() {
 	defer frontend.cleanupWindow()
+	defer backend.destroyVulkan()
 	appName: cstring = "Vodin"
 	if !frontend.createWindow(800, 600, appName) {
 		fmt.println("[ERROR] XCB initialization failed!")

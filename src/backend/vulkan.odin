@@ -41,7 +41,6 @@ initVulkan :: proc() -> bool {
 	}
 
 	must(vk.CreateInstance(&instanceInfo, nil, &vulkanInstance))
-	defer vk.DestroyInstance(vulkanInstance, nil)
 
 	vk.load_proc_addresses_instance(vulkanInstance)
 	// load_proc_adresses_instance(vulkanInstance)
@@ -57,6 +56,10 @@ enumerateGPUs :: proc() -> bool {
 	fmt.printfln("[INFO] Found %d physical GPUs", deviceCount)
 
 	must(vk.EnumeratePhysicalDevices(vulkanInstance, &deviceCount, &physicalDevices[0]))
+	if len(physicalDevices) == 0 {
+		fmt.println("[INFO] No physical devices found")
+		return false
+	}
 
 	for i: u32 = 0; i < deviceCount; i += 1 {
 		properties: vk.PhysicalDeviceProperties
@@ -70,6 +73,8 @@ enumerateGPUs :: proc() -> bool {
 			API_VERSION_PATCH(properties.apiVersion),
 		)
 	}
+
+	selectBestGPU()
 	return true
 }
 
@@ -92,11 +97,39 @@ selectBestGPU :: proc() {
 
 		// Biggest VRAM
 		for j: u32 = 0; j < memoryProperties.memoryHeapCount; j += 1 {
-			if (memoryProperties.memoryHeaps[j].flags & .DEVICE_LOCAL) != 0 {
-				vram = memoryProperties.memoryHeaps[j].size
+			if (vk.MemoryHeapFlag.DEVICE_LOCAL in memoryProperties.memoryHeaps[j].flags) {
+				vram = auto_cast memoryProperties.memoryHeaps[j].size
 			}
 		}
+
+		fmt.printf(
+			"[INFO] GPU %d: %s | Type: %d | VRAM: %d MB",
+			i,
+			gpuName,
+			gpuType,
+			vram / (1024 * 1024),
+		)
+		isBetterGPU := false
+		if gpuType == .DISCRETE_GPU && (bestType != .DISCRETE_GPU || vram > bestVRAM) {
+			isBetterGPU = true
+		} else if gpuType == .INTEGRATED_GPU && bestType != .DISCRETE_GPU && vram > bestVRAM {
+			isBetterGPU = true
+		}
+		if bestGPU == nil {
+			fmt.println("[ERROR] no suitable gpu found")
+		}
+
+		selectBestGPU := bestGPU
+		fmt.printf(
+			"[INFO] Selected GPU: %s | VRAM: %d MB\n",
+			properties.deviceName[:],
+			bestVRAM / (1024 * 1024),
+		)
 	}
+}
+
+destroyVulkan :: proc() {
+	defer vk.DestroyInstance(vulkanInstance, nil)
 }
 
 must :: proc(result: vk.Result, loc := #caller_location) {
