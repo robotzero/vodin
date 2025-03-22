@@ -15,7 +15,12 @@ xcbConnection: ^Connection
 xcbWindow: u32
 running: bool = true
 
-createWindow :: proc(width, height: u16, appName: cstring) -> bool {
+screenData :: struct {
+	xcbConnection: ^Connection,
+	xcbWindow:     u32,
+}
+
+createWindow :: proc(width, height: u16, appName: cstring) -> (bool, screenData) {
 	screenp: i32
 	xcbConnection = connect(nil, &screenp)
 	result := connection_has_error(xcbConnection)
@@ -24,7 +29,7 @@ createWindow :: proc(width, height: u16, appName: cstring) -> bool {
 	}
 	if xcbConnection == nil {
 		fmt.println("[ERROR] Failed to connecto to XCB!")
-		return false
+		return false, {}
 	}
 	xcbWindow = generate_id(xcbConnection)
 
@@ -70,11 +75,11 @@ createWindow :: proc(width, height: u16, appName: cstring) -> bool {
 	map_window(xcbConnection, xcbWindow)
 	if flush(xcbConnection) <= 0 {
 		fmt.println("[ERROR] flush failed")
-		return false
+		return false, {}
 	}
 
 	fmt.println("[INFO] XCB window create successfully!")
-	return true
+	return true, {xcbConnection, xcbWindow}
 }
 
 pollEvents :: proc() {

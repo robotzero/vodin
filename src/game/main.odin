@@ -10,12 +10,13 @@ runGame :: proc() {
 	defer frontend.cleanupWindow()
 	defer backend.destroyVulkan()
 	appName: cstring = "Vodin"
-	if !frontend.createWindow(800, 600, appName) {
+	success, screenData := frontend.createWindow(800, 600, appName)
+	if !success {
 		fmt.println("[ERROR] XCB initialization failed!")
 		return
 	}
 
-	if !backend.initVulkan() {
+	if !backend.initVulkan(screenData) {
 		fmt.println("[ERROR] Vulkan initialization failed!")
 		// frontend.cleanup_x11()
 		return
